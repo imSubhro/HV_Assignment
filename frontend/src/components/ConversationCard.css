@@ -1,0 +1,189 @@
+.conv {
+  background: var(--white);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  transition: box-shadow 0.2s ease, transform 0.2s ease;
+}
+
+.conv:hover {
+  box-shadow: 0 10px 28px rgba(19, 28, 46, 0.08);
+  transform: translateY(-2px);
+}
+
+.conv__media {
+  position: relative;
+  aspect-ratio: 16 / 9;
+  background: linear-gradient(135deg, #e8e2d8, #d5cbbd);
+}
+
+.conv__img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.conv__category {
+  position: absolute;
+  left: 12px;
+  bottom: 12px;
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  background: var(--navy);
+  color: var(--white);
+  font-size: 11.5px;
+  font-weight: 600;
+  padding: 6px 12px;
+  border-radius: 999px;
+}
+
+.conv__category i {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--white);
+}
+
+.conv__body {
+  padding: 16px 18px 18px;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.conv__pills {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  margin-bottom: 14px;
+}
+
+.conv__pill {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  background: var(--soft);
+  border-radius: 999px;
+  padding: 8px 10px;
+  font-size: 11.5px;
+  font-weight: 500;
+  color: var(--body);
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.conv__pill b {
+  font-weight: 700;
+  color: var(--ink);
+}
+
+.conv__title {
+  font-size: 17px;
+  font-weight: 800;
+  line-height: 1.3;
+  margin-bottom: 12px;
+}
+
+.conv__meta {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  flex-wrap: wrap;
+  margin-bottom: 14px;
+}
+
+.conv__meta span {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  font-size: 12px;
+  color: var(--muted);
+}
+
+.conv__host {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 14px;
+}
+
+.conv__host-text p {
+  font-size: 12.5px;
+  color: var(--body);
+}
+
+.conv__host-text strong {
+  color: var(--ink);
+  font-weight: 700;
+}
+
+.conv__host-text span {
+  font-size: 11.5px;
+  color: var(--muted-2);
+}
+
+.conv__footer {
+  margin-top: auto;
+  padding-top: 14px;
+  border-top: 1px solid var(--line-2);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.conv__link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-heading);
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--ink);
+}
+
+.conv__arrow {
+  width: 32px;
+  height: 32px;
+}
+
+/* ---- mini variant (How it works) ---- */
+
+.conv--mini {
+  width: 190px;
+  box-shadow: var(--shadow-card);
+}
+
+.conv--mini .conv__body {
+  padding: 10px 12px 12px;
+}
+
+.conv--mini .conv__pills,
+.conv--mini .conv__meta,
+.conv--mini .conv__footer {
+  display: none;
+}
+
+.conv--mini .conv__title {
+  font-size: 12.5px;
+  margin-bottom: 8px;
+}
+
+.conv--mini .conv__host {
+  margin-bottom: 0;
+}
+
+.conv--mini .conv__host-text p,
+.conv--mini .conv__host-text span {
+  display: none;
+}
+
+.conv--mini .conv__category {
+  font-size: 10px;
+  padding: 4px 9px;
+}
