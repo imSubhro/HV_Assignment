@@ -1,6 +1,8 @@
 import logging
+import os
 import time
 from contextlib import asynccontextmanager
+from urllib.parse import urlsplit, urlunsplit
 
 from fastapi import FastAPI, Request
 from fastapi.middleware.cors import CORSMiddleware
@@ -8,6 +10,18 @@ from fastapi.middleware.cors import CORSMiddleware
 from app.api.v1.router import api_router
 from app.core.config import settings
 from app.core.errors import register_exception_handlers
+
+
+def _redact_db_url(url: str) -> str:
+    """scheme://host:port/path with credentials removed."""
+    try:
+        parts = urlsplit(url)
+        host = parts.hostname or ""
+        if parts.port:
+            host = f"{host}:{parts.port}"
+        return urlunsplit((parts.scheme, host, parts.path, "", ""))
+    except Exception:
+        return "<unparseable-url>"
 
 logging.basicConfig(
     level=logging.INFO,
@@ -19,6 +33,15 @@ logger = logging.getLogger("community.request")
 @asynccontextmanager
 async def lifespan(app: FastAPI):
     logger.info("Starting %s", settings.app_name)
+    raw_env = os.environ.get("DATABASE_URL")
+    if raw_env:
+        logger.info("DATABASE_URL (from env): %s", _redact_db_url(raw_env))
+    else:
+        logger.warning(
+            "DATABASE_URL env var is NOT SET - falling back to config default: %s",
+            _redact_db_url(settings.database_url),
+        )
+    logger.info("Effective database_url: %s", _redact_db_url(settings.database_url))
     yield
     logger.info("Shutting down %s", settings.app_name)
 
